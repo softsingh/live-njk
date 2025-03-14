@@ -54,7 +54,7 @@
         "liveNjk.outputDirectory": {
           "type": "string",
           "default": "",
-          "description": "Directory where compiled HTML files will be saved (relative to workspace root)"
+          "description": "Directory where compiled HTML files will be saved (relative to njk root)"
         },
         "liveNjk.filesGlob": {
           "type": "string",
