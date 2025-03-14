@@ -2,7 +2,7 @@
   "name": "live-njk",
   "displayName": "Live Njk",
   "description": "Live compiler for Nunjucks (.njk) templates to HTML",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icon": "icon.png",
   "publisher": "softsingh",
   "repository": {
@@ -45,6 +45,11 @@
           "type": "boolean",
           "default": true,
           "description": "Automatically start the Njk compiler when a workspace with .njk files is opened"
+        },
+        "liveNjk.rootDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Directory to look for .njk files (relative to workspace root)"
         },
         "liveNjk.outputDirectory": {
           "type": "string",

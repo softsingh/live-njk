@@ -28,7 +28,8 @@ A Visual Studio Code extension (created with AI) that compiles Nunjucks (.njk) t
 This extension contributes the following settings:
 
 * `liveNjk.autoStartWatcher`: Automatically start the compiler when a workspace with .njk files is opened
-* `liveNjk.outputDirectory`: Directory where compiled HTML files will be saved (relative to workspace root)
+* `liveNjk.rootDirectory`: Directory to look for .njk files (relative to workspace root)
+* `liveNjk.outputDirectory`: Directory where compiled HTML files will be saved (relative to `njk root`)
 * `liveNjk.filesGlob`: Glob pattern to match Nunjucks files
 * `liveNjk.excludePartials`: Skip compilation of partial files (filenames starting with _)
 
@@ -39,6 +40,10 @@ The extension watches for changes to .njk files in your workspace. When a file i
 Partial files (those starting with `_`) are not compiled directly but will trigger recompilation of files that include them.
 
 ## Release Notes
+
+### 1.0.1
+
+- Added ability to set root njk directory (`liveNjk.rootDirectory`)
 
 ### 1.0.0
 

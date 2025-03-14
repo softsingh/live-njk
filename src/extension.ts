@@ -197,13 +197,15 @@ function findFilesToRecompile(filePath: string): string[] {
 }
 
 async function compileAllFiles() {
-	const workspaceFolders = vscode.workspace.workspaceFolders;
-	if (!workspaceFolders) {
-		vscode.window.showErrorMessage('Live Njk: No workspace folder found');
-		return;
-	}
+	// const workspaceFolders = vscode.workspace.workspaceFolders;
+	// if (!workspaceFolders) {
+	// 	vscode.window.showErrorMessage('Live Njk: No workspace folder found');
+	// 	return;
+	// }
 
-	const rootPath = workspaceFolders[0].uri.fsPath;
+	// const rootPath = workspaceFolders[0].uri.fsPath;
+	const rootPath = getRootPath();
+
 	const config = vscode.workspace.getConfiguration('liveNjk');
 	const outputDir = config.get<string>('outputDirectory', 'dist');
 	const njkGlob = config.get<string>('filesGlob', '**/*.njk');
@@ -266,7 +268,8 @@ async function startCompiler() {
 
 	try {
 		// Start watching files
-		const rootPath = workspaceFolders[0].uri.fsPath;
+		//const rootPath = workspaceFolders[0].uri.fsPath;
+		const rootPath = getRootPath();
 
 		// Create Nunjucks environment
 		createNunjucksEnvironment(rootPath);
@@ -408,4 +411,24 @@ async function compileNjkFile(filePath: string, rootPath: string, outputDir: str
 		outputChannel.appendLine(`Failed to compile ${filePath}: ${error}`);
 		throw new Error(`Failed to compile ${filePath}: ${error}`);
 	}
+}
+
+// Helper function to get root path
+function getRootPath(): string {
+	let rootPath = '';
+
+	const workspaceFolders = vscode.workspace.workspaceFolders;
+
+	if (!workspaceFolders) {
+		vscode.window.showErrorMessage('Live Njk: No workspace folder found');
+		return "";
+	}
+
+	// Get configuration
+	const config = vscode.workspace.getConfiguration('liveNjk');
+	const rootDir = config.get<string>('rootDirectory', '');
+
+	rootPath = path.join(workspaceFolders[0].uri.fsPath, rootDir);
+
+	return rootPath;
 }
