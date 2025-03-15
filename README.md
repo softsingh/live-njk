@@ -41,6 +41,10 @@ Partial files (those starting with `_`) are not compiled directly but will trigg
 
 ## Release Notes
 
+### 1.0.2
+
+- Added formatting the output html using `js-beautify`
+
 ### 1.0.1
 
 - Added ability to set root njk directory (`liveNjk.rootDirectory`)

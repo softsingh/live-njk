@@ -2,7 +2,7 @@
   "name": "live-njk",
   "displayName": "Live Njk",
   "description": "Live compiler for Nunjucks (.njk) templates to HTML",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "icon.png",
   "publisher": "softsingh",
   "repository": {
@@ -82,6 +82,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
+    "@types/js-beautify": "^1.14.3",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/nunjucks": "^3.2.6",
@@ -99,6 +100,7 @@
   "dependencies": {
     "chokidar": "^3.6.0",
     "fs-extra": "^11.3.0",
+    "js-beautify": "^1.15.4",
     "nunjucks": "^3.2.4"
   }
 }

@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as nunjucks from 'nunjucks';
 import * as chokidar from 'chokidar';
+import { html as beautifyHtml } from "js-beautify";
 
 let watcher: chokidar.FSWatcher | undefined;
 let statusBarItem: vscode.StatusBarItem;
@@ -380,20 +381,20 @@ async function compileNjkFile(filePath: string, rootPath: string, outputDir: str
 		// Read the template content directly from disk to avoid Nunjucks caching
 		const templateContent = await fs.readFile(filePath, 'utf-8');
 
-		// Calculate template name (relative to root path)
-		const templateName = relativePath;
-
 		// Calculate the directory containing the template for correct include resolution
 		const templateDir = path.dirname(filePath);
 
 		// Render the template directly from content to bypass any Nunjucks caching
-		const result = njkEnv.renderString(templateContent, {
+		let result = njkEnv.renderString(templateContent, {
 			// Add a context object with useful properties
 			_self: {
 				path: filePath,
 				directory: templateDir
 			}
 		});
+
+		// Beautify the Html using js-beautify
+		result = beautifyHtml(result, { indent_size: 3, wrap_line_length: 120 });
 
 		// Calculate output path
 		const outputFileName = path.basename(filePath, '.njk') + '.html';
